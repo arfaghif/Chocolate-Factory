@@ -7,22 +7,54 @@ class ChocoList extends Component {
       messages:  [
         {
           _id: '1',
-          from: 'John',
-          content: 'The event will start next week',
-          status: 'unread'
+          choco: 'Choco 1',
+          jumlah: '5',
+          receipts : [
+             "ayam",
+             "telur",
+           "coklat",
+          ]
         },
         {
           _id: '2',
-          from: 'Martha',
-          content: 'I will be traveling soon',
-          status: 'read'
+          choco: 'Choco 2',
+          jumlah: '4',
+          receipts : [
+             "ayam",
+             "waffle",
+           "coklat",
+          ]
         },
         {
           _id: '3',
-          from: 'Jacob',
-          content: 'Talk later. Have a great day!',
-          status: 'read'
-        }
+          choco: 'Choco 3',
+          jumlah: '7',
+          receipts : [
+             "bebek",
+             "gula",
+           "merica",
+          ]
+        },
+        // {
+        //   _id: '2',
+        //   choco: 'Choco 2',
+        //   jumlah: '10',
+        //   receipts : [
+        //     {name : "ayam"},
+        //     {name : "telur"},
+        //     {name :"coklat"},
+        //   ]
+        // },
+        // {
+        //   _id: '3',
+        //   choco: 'Choco 3',
+        //   jumlah: '5',
+        //   receipts : [
+        //     {name : "ayam"},
+        //     {name : "telur"},
+        //     {name :"coklat"},
+        //   ]
+        // }
       ]
     }
   
@@ -32,8 +64,8 @@ class ChocoList extends Component {
       )
   
       return(
-        <div class="container p-3 my-3 bg-primary text-white">
-          <h1>List of chocolate</h1>
+        <div class="list-group">
+          <h1 class="px-3">List of chocolate</h1>
           {chocolateViews}
         </div>
       )

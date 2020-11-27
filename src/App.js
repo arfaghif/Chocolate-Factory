@@ -8,7 +8,7 @@ import Saldo from './saldo';
 class App extends Component {
   render(){
     return (
-      <Saldo/>
+      <ChocoList/>
       
     )
   }
