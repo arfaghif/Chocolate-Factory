@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChocoAvailable from './choco-available';
-
+import Navbar from './navbar';
 class ChocoGrid extends React.Component{
     state = {
         messages:  [
@@ -47,11 +47,18 @@ class ChocoGrid extends React.Component{
           )
       
           return(
-            <div class="container">
-              <div class= "row">
-                  {chocolateAvailable}
-              </div>
-            </div>
+            <html>
+            <body>
+              <header>
+                <Navbar/>
+              </header>
+                    <div class="container">
+                    <div class= "row">
+                        {chocolateAvailable}
+                    </div>
+                    </div>
+            </body>
+            </html>
           )
     }
 }

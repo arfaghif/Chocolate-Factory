@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, {  Component } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from './navbar';
 
 class MainPage extends Component{
     constructor(props) {
       super(props);
       this.state = { 
-        items:  [{text: 'Approval Pesanan', link:"#"},
+        items:  [{text: 'Approval Pesanan', link:"/approvetable"},
                   {text: 'Daftar Pemesanan', link:"#"},
                   {text: 'Daftar Bahan', link:"#"},
                   {text: 'Daftar Harga Bahan Supplier', link:"#"},
                   {text: 'Beli Bahan Dari Supplier', link:"#"},
-                  {text: 'Daftar Resep Coklat', link:"#"},
-                  {text: 'Daftar Coklat Tersedia di Pabrik', link:"#"}]
+                  {text: 'Daftar Resep Coklat', link:"/receipts/list"},
+                  {text: 'Daftar Coklat Tersedia di Pabrik', link:"/choco/grid"}]
       };
     }
 
@@ -34,9 +35,11 @@ class Buttons extends Component{
     return (
       <div class = "container p-3 my-3 bg-light text-white">
           {this.props.items.map(item => (
-            <div class = "btn w-100 p-3 my-3 btn-info btn-lg" href={item.link}>
+            <Link to=  {item.link}>
+            <div class = "btn w-100 p-3 my-3 btn-info btn-lg" >
               {item.text}
             </div>
+            </Link>
             ))}
       </div>
     );
