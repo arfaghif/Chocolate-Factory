@@ -13,6 +13,7 @@ import ApproveTable from "./approvetable"
 import MainPage from "./mainpage";
 import Numbers from "./numbers";
 
+import Client from "./client"
 
 // class App extends Component {
 //   render(){
@@ -125,7 +126,7 @@ class App extends Component {
                 <Route
                     path="/num"
                     exact
-                    component={Numbers}
+                    component={Client}
                 />
                 <Route
                 component={notFound}
