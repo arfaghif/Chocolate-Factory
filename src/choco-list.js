@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChocolateView from './chocolate-view';
-
+import Navbar from './navbar';
 
 class ChocoList extends Component {
     state = {
@@ -64,10 +64,17 @@ class ChocoList extends Component {
       )
   
       return(
-        <div class="list-group">
-          <h1 class="px-3">List of chocolate</h1>
-          {chocolateViews}
-        </div>
+        <html>
+            <body>
+              <header>
+                <Navbar/>
+              </header>
+                <div class="list-group">
+                  <h4 class="px-3 pb-2 pt-4 ">List of chocolate</h4>
+                  {chocolateViews}
+                </div>
+            </body>
+          </html>
       )
     }
   }

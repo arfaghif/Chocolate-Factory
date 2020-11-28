@@ -24,10 +24,10 @@ class ChocolateView extends React.Component {
     const message = this.props.message;
 
     return(
-      <div class = "py-1">
-      <a href="#" onClick={this.handleClick} class="list-group-item list-group-item-action flex-column align-items-star  " style={{backgroundColor:"cornsilk"}}>
+      <div class = "px-2 py-1">
+      <a href="#" onClick={this.handleClick} class="list-group-item list-group-item-action flex-column align-items-star bg-info text-white " >
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">From:{message.choco} </h5>
+        <h5 class="mb-1"> {message.choco} </h5>
         
       </div>
       <p class="mb-1">Jumlah : {message.jumlah}</p>
