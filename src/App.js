@@ -9,7 +9,7 @@ import Navbar from './navbar'
 import { BrowserRouter as Router, Route, Switch,Link, Redirect } from 'react-router-dom';
 import ApproveTable from "./approvetable"
 import MainPage from "./mainpage"
-
+import Numbers from "./numbers"
 
 // class App extends Component {
 //   render(){
@@ -110,8 +110,14 @@ class App extends Component {
                     component={MainPage}
                 />
                 <Route
+                    path="/num"
+                    exact
+                    component={Numbers}
+                />
+                <Route
                 component={notFound}
                 />
+
             </Switch>
           </div>
         </Router>
