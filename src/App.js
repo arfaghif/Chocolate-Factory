@@ -4,12 +4,15 @@ import Login from './login';
 import Register from './register';
 import ChocoList from './choco-list';
 import Saldo from './saldo';
+import DaftarBahan from './daftar-bahan';
+import BuyPage from './buy-page';
 import ChocoGrid from './choco-grid'
 import Navbar from './navbar'
 import { BrowserRouter as Router, Route, Switch,Link, Redirect } from 'react-router-dom';
 import ApproveTable from "./approvetable"
-import MainPage from "./mainpage"
-import Numbers from "./numbers"
+import MainPage from "./mainpage";
+import Numbers from "./numbers";
+
 
 // class App extends Component {
 //   render(){
@@ -108,6 +111,16 @@ class App extends Component {
                     path="/Home"
                     exact
                     component={MainPage}
+                />
+                <Route
+                    path="/buy"
+                    exact
+                    component={MainPage}
+                />
+                <Route
+                    path="/receipts"
+                    exact
+                    component={DaftarBahan}
                 />
                 <Route
                     path="/num"

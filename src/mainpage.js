@@ -7,10 +7,10 @@ class MainPage extends Component{
       super(props);
       this.state = { 
         items:  [{text: 'Approval Pesanan', link:"/approvetable"},
-                  {text: 'Daftar Pemesanan', link:"#"},
-                  {text: 'Daftar Bahan', link:"#"},
-                  {text: 'Daftar Harga Bahan Supplier', link:"#"},
-                  {text: 'Beli Bahan Dari Supplier', link:"#"},
+                  // {text: 'Daftar Pemesanan', link:"#"},
+                  {text: 'Daftar Bahan', link:"./receipts"},
+                  // {text: 'Daftar Harga Bahan Supplier', link:"#"},
+                  // {text: 'Beli Bahan Dari Supplier', link:"#"},
                   {text: 'Daftar Resep Coklat', link:"/receipts/list"},
                   {text: 'Daftar Coklat Tersedia di Pabrik', link:"/choco/grid"}]
       };
