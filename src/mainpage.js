@@ -18,14 +18,12 @@ class MainPage extends Component{
 
     render(){
         return(
-          <html>
-            <body>
+            <div>
               <header>
                 <Navbar/>
               </header>
               <Buttons items = {this.state.items} />
-            </body>
-          </html>
+            </div>
         );
     }
 }
@@ -35,14 +33,14 @@ class Buttons extends Component{
   render() {
     const items = this.props.items.map(item => (
       <Link to=  {item.link}>
-      <div class = "btn w-100 p-3 my-3 btn-info btn-lg" >
+      <div className = "btn w-100 p-3 my-3 btn-info btn-lg" >
         {item.text}
       </div>
       </Link>
     ))
     
     return (
-      <div class = "container p-3 my-3 bg-light text-white">
+      <div className = "container p-3 my-3 bg-light text-white">
           {items}
       </div>
     );

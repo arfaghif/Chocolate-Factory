@@ -33,11 +33,11 @@ class BuyPage extends Component{
         fetch('http://localhost:3001/api/beli', {
          method: 'post',
          headers: {'Content-Type':'application/json'},
-         body: JSON.stringify([{
+         body: JSON.stringify({
           "nambahan" : this.props.namaproduk,
           "amount" : this.state.amount,
           "saldo" : 1000000
-         }])
+         })
         });
         this.setState({buysuc:true});
        };

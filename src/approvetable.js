@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import Navbar from './navbar';
+import url from './url';
 
 
 var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
@@ -10,7 +11,7 @@ var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
         </ns2:getReqChoc>
     </S:Body>
 </S:Envelope>`
-var url = "http://localhost:8080/myApp/ws/req-choc";
+var urlApp = url.url+"req-choc";
 
 
 
@@ -33,7 +34,7 @@ class ApproveTable extends Component {
   componentDidMount(){
     console.log("hello")
     var request = new XMLHttpRequest();
-    request.open("POST",url,true);
+    request.open("POST",urlApp,true);
     request.onreadystatechange = function(res){
         if (request.readyState===4){
             res = request.responseXML;
@@ -122,7 +123,7 @@ class EditButton extends Component{
     if (this.state.showButton) {
       return (
         <div>
-          <button onClick={() => this.setState({showModal: !this.state.showModal})} type="button" class="btn btn-info btn-xs m-0">Approve</button>
+          <button onClick={() => this.setState({showModal: !this.state.showModal})} type="button" class="btn btn-info btn-xs m-2">Approve</button>
           <ApproveModal show ={this.state.showModal} onHide = {() => this.setState({showModal : !this.state.showModal})} id={this.props.id}/>
         </div>
         );
@@ -158,7 +159,7 @@ class ApproveModal extends Component{
       <Modal.Body>Approve request with id = {this.props.id}?</Modal.Body>
           <Modal.Footer>
             <button onClick={this.hide()} type="button" class="btn btn-danger btn-xs">Cancel</button>
-            <button onClick={this.handleApprove(this.props.id)} class="btn btn-success btn-xs">Save</button>
+            <button onClick={this.handleApprove(this.props.id)} class="btn btn-success btn-xs">Approve</button>
           </Modal.Footer>
         </Modal>
     );
@@ -167,4 +168,4 @@ class ApproveModal extends Component{
 }
 
 
-export default ApproveTable;sss
+export default ApproveTable;
