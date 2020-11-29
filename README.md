@@ -12,3 +12,10 @@ Aplikasi ini merupakan sebuah antarmuka untuk manajemen Willy Wangky’s Factory
 Aplikasi ini tidak memiliki struktur basis data sehingga setiap tampilan didapat dengan mengirim request ke Web Service Factory menggunakan protokol SOAP, maupun Web Service Supplier menggunakan protokol REST.
 
 # Screenshot aplikasi Willy Wangky’s Factory
+![approve](assets/approvetable.png)
+![beli](assets/belibahan.png)
+![cho-av](assets/choco-available.png)
+![home](assets/Home.png)
+![login](assets/login.png)
+![list](assets/receiptlist.png)
+
