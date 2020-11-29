@@ -60,8 +60,9 @@
 //         // });
 //     }
 // }
+import React, { useCallback } from 'react'
+import {Button, Modal, Row, Col, Nav } from 'react-bootstrap';
 
-import React from 'react'
 var axios = require('axios');
 // import {SOAPDataSource} from "apollo-datasource-soap";
 
@@ -74,12 +75,12 @@ var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
     </S:Body>
 </S:Envelope>`
 
-var url = "http://localhost:8001/myApp/ws/saldo";
+var urlSaldo = "http://localhost:8001/myApp/ws/saldo";
 
 export default class Client extends React.Component{
     constructor(props){
       super(props);
-      this.state={message:""}
+      this.state={message:"test"}
     }
     componentDidMount(){
       console.log("hello")
@@ -88,10 +89,16 @@ export default class Client extends React.Component{
       request.onreadystatechange = function(res){
           if (request.readyState===4){
               res = request.responseXML;
-            //   res = res.getElementsByTagName("return")[0].childNodes[0];
+                res = res.getElementsByTagName("return")[0].childNodes[0];
               console.log(res);
+              var res2;
+              res2 = request.responseXML;
+              console.log(res2);
+              res = res2.getElementsByTagName("return")[0].childNodes[0].nodeValue;
+              this.setState({message: res});
           }
-      }
+      }.bind(this);
+      console.log(this.state.message);
       request.setRequestHeader("Content-type","text/xml")
       console.log("1");
       request.send(SoaMessage);
@@ -99,6 +106,13 @@ export default class Client extends React.Component{
     }
 
     render() {
+        return(
+            <h2>
+                {this.state.message}
+            </h2>
+        );
+    }
+    
     //     // YANG CAMCAM
     //     const FACTORY_BASE_URL = "http://localhost:8000/MyApp/ws";
     //     const FACTORY_HELLO = FACTORY_BASE_URL + "/hello?wsdl";
@@ -158,7 +172,7 @@ export default class Client extends React.Component{
             // request.setRequestHeader("Access-Control-Allow-Origin" ,"http://localhost:8080");
            
             
-            return<a>res</a>;
+            
             
             // var request = new XMLHttpRequest();
             // request.open("POST",url,true);
@@ -183,6 +197,6 @@ export default class Client extends React.Component{
 		// request.setRequestHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
         //     request.send(SoaMessage);
         // });
-    }
+    
 }
 
