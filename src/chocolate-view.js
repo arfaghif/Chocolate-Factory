@@ -32,7 +32,7 @@ class ChocolateView extends React.Component {
       </div>
       <p class="mb-1">Jumlah : {message.jumlah}</p>
       
-      {this.state.list?  "List Receipts" : "Tap for view recept" }
+      {this.state.list?  "List Receipts" : "Tap for view receipts" }
       <div style = {{display :  this.state.list ? '' : 'none'}}>
       <ReceiptList receipts = {message.receipts}/>
       </div>

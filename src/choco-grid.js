@@ -57,8 +57,9 @@ export default class ChocoGrid extends React.Component{
               <header>
                 <Navbar/>
               </header>
-                    <div className="container">
-                    <div className= "row">
+                    <div className="container pt-5">
+                      <h3 className="pl-5">List Chocolate Available</h3>
+                    <div className= "py-1 row ">
                         {chocolateAvailable}
                     </div>
                     </div>

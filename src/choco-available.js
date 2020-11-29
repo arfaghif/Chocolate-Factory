@@ -12,13 +12,13 @@ class ChocoAvailable extends React.Component {
     const message = this.props.message;
 
     return(
-    <div className = "py-5 px-2">
-        <div className="col-md-40 bg-info text-white"  >
+    <div className = "pt-1 px-2">
+        <div className="container m-5  bg-info text-white"  >
 
-                <div className="card-body">
-                <h5> {message.choco}</h5>
-                <p className="card-text">Jumlah : {message.jumlah}</p>
-             </div>
+                <div style={ {textAlign:"center"}}>
+                <h5 className="pt-5 px-7 "> {message.choco}</h5>
+                <p className ="pb-5 pt-2 px-7 " >Jumlah : {message.jumlah}</p>
+                </div>
              </div>
     </div>
     )

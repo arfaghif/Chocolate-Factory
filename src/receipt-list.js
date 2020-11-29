@@ -11,7 +11,7 @@ class ReceiptList extends Component {
         };
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.setState({messages: this.props.receipts})
     }
 
