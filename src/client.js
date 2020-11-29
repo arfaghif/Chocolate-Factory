@@ -69,14 +69,12 @@ var axios = require('axios');
 var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:bonjour xmlns:ns2="http://codejava.net/">
-        <arg0>"Annisa"</arg0>
-        <arg1>"Fat"</arg1>
-        </ns2:bonjour>
+        <ns2:getSaldo xmlns:ns2="http://codejava.net/">
+        </ns2:getSaldo>
     </S:Body>
 </S:Envelope>`
 
-var url = "http://localhost:8000/MyApp/ws/hello";
+var url = "http://localhost:8001/myApp/ws/saldo";
 
 export default class Client extends React.Component{
     constructor(props){
@@ -90,7 +88,7 @@ export default class Client extends React.Component{
       request.onreadystatechange = function(res){
           if (request.readyState===4){
               res = request.responseXML;
-              res = res.getElementsByTagName("return")[0].childNodes[0].childNodes[0];
+            //   res = res.getElementsByTagName("return")[0].childNodes[0];
               console.log(res);
           }
       }
