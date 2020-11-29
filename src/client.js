@@ -62,7 +62,8 @@
 // }
 import React, { useCallback } from 'react'
 import {Button, Modal, Row, Col, Nav } from 'react-bootstrap';
-
+import ChocoAvailable from './choco-available';
+import Navbar from './navbar';
 var axios = require('axios');
 // import {SOAPDataSource} from "apollo-datasource-soap";
 
@@ -70,17 +71,17 @@ var axios = require('axios');
 var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:getSaldo xmlns:ns2="http://codejava.net/">
-        </ns2:getSaldo>
+        <ns2:getChocoAvail xmlns:ns2="http://codejava.net/">
+        </ns2:getChocoAvail>
     </S:Body>
 </S:Envelope>`
 
-var urlSaldo = "http://localhost:8001/myApp/ws/saldo";
+var url = "http://localhost:8001/myApp/ws/choco-avail";
 
 export default class Client extends React.Component{
     constructor(props){
       super(props);
-      this.state={message:"test"}
+      this.state={messages:[]}
     }
     componentDidMount(){
       console.log("hello")
@@ -89,6 +90,7 @@ export default class Client extends React.Component{
       request.onreadystatechange = function(res){
           if (request.readyState===4){
               res = request.responseXML;
+              console.log(res);
                 res = res.getElementsByTagName("return")[0].childNodes[0];
               console.log(res);
               var res2;
@@ -96,6 +98,9 @@ export default class Client extends React.Component{
               console.log(res2);
               res = res2.getElementsByTagName("return")[0].childNodes[0].nodeValue;
               this.setState({message: res});
+              var obj = JSON.parse(res)
+              console.log(obj.chocs)
+            this.setState({messages: obj.chocs});
           }
       }.bind(this);
       console.log(this.state.message);
@@ -105,98 +110,26 @@ export default class Client extends React.Component{
       // console.log(res);
     }
 
-    render() {
-        return(
-            <h2>
-                {this.state.message}
-            </h2>
-        );
+    render(){
+        // if(this.state.messages)
+        const chocolateAvailable = this.state.messages.map(
+            message => <ChocoAvailable key={message._id} message={message} />
+          )
+      
+          return(
+            <html>
+            <body>
+              <header>
+                <Navbar/>
+              </header>
+                    <div class="container">
+                    <div class= "row">
+                        {chocolateAvailable}
+                    </div>
+                    </div>
+            </body>
+            </html>
+          )
     }
-    
-    //     // YANG CAMCAM
-    //     const FACTORY_BASE_URL = "http://localhost:8000/MyApp/ws";
-    //     const FACTORY_HELLO = FACTORY_BASE_URL + "/hello?wsdl";
-    //     const FACTORY_AUTH = FACTORY_BASE_URL + "/auth?wsdl";
-    //     const FACTORY_MAIN = FACTORY_BASE_URL + "/factory?wsdl";
-    //     const FACTORY_SALDO = FACTORY_BASE_URL + "/saldoakun?wsdl";
-
-    //     const soapRequest = async (wsdl, functionName, args) =>
-    //     (await new SOAPDataSource(wsdl).invoke(functionName, args)).return;
-
-    //     const sayHello = async (args) =>
-    //     soapRequest(FACTORY_HELLO, "bonjour", args);
-
-    //     console.log(sayHello("Nopal"));
-    //     return(<a>test</a>); 
-    // }
-    //numbers(){
-        
-        
-        
-        // YANG RARAS
-        // var axios = require('axios');
-        // var data = `<soapenv:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'>
-        // <soapenv:Body>
-        //     <ns1:bonjour xmlns:ns1="http://codejava.net/">
-        //     <name>"Annisa"</name>
-        //     </ns1:bonjour>
-        // </soapenv:Body>
-        // </soapenv:Envelope>`;
-        
-        // // yellow highlight: method di FactoryWSImpl.java
-        // // purple highlight: di method itu, liat webParamnya apa
-        // // blue highlight: liat di xsd, buat type webparam ini parameternya apa aja
-        
-        // var config = {
-        //     method: 'post',
-        //     url: 'http://localhost:8000/MyApp/ws/hello?wsdl',
-        //     headers: { 
-        //         'Content-MD5': 'text/xml', 
-        //         'Content-Type': 'text/xml',
-        //     },
-        //     data : data
-        // };
-        
-        // axios(config)
-        // .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        // })
-        // .catch(function (error) {
-        // console.log(error);
-        // });
-        // return <a>tes</a>
-    //  YANG IBNU
-        // let result = new Promise(()=>{
-
-            // request.setRequestHeader("Access-Control-Allow-Origin" ,"http://localhost:3000");
-            // request.setRequestHeader("Access-Control-Allow-Origin" ,"http://localhost:8080");
-           
-            
-            
-            
-            // var request = new XMLHttpRequest();
-            // request.open("POST",url,true);
-            // console.log("2");
-            // request.onreadystatechange = () =>{
-            //     if (request.readyState===4){
-            //         var res = request.responseXML;
-            //         res = res.getElementsByTagName("return")[0].childNodes[0].data;
-            //         console.log(res);
-
-            //     }
-            //     console.log("failes");
-            //     // let raw = request.responseText;
-            //     // let objectified = JSON.parse(raw);
-            //     // resolve(objectified);
-            // }
-        //     console.log("3");
-        //     request.setRequestHeader("Access-Control-Allow-Origin", "*");
-		// request.setRequestHeader("Access-Control-Allow-Credentials", "true");
-		// request.setRequestHeader("Access-Control-Max-Age", "1800");
-		// request.setRequestHeader("Access-Control-Allow-Headers", "content-type");
-		// request.setRequestHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
-        //     request.send(SoaMessage);
-        // });
-    
 }
 
