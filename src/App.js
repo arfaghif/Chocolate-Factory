@@ -129,6 +129,11 @@ class App extends Component {
                     component={Client}
                 />
                 <Route
+                    path="/beli"
+                    exact
+                    component={DaftarBahan}
+                />
+                <Route
                 component={notFound}
                 />
 

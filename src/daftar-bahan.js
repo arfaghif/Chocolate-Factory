@@ -4,15 +4,23 @@ import BuyPage from './buy-page';
 import Navbar from './navbar';
 
 class DaftarBahan extends Component{
-    daftarBahan = [
-        {nama: "Buah1", jumlah: "100", harga: "100.000"},
-        {nama: "Buah2", jumlah: "100", harga: "100.000"},
-        {nama: "Buah3", jumlah: "100", harga: "100.000"},
-        {nama: "Buah4", jumlah: "100", harga: "100.000"},
-        {nama: "Buah5", jumlah: "100", harga: "100.000"},
-        {nama: "Buah6", jumlah: "100", harga: "100.000"},
-        {nama: "Buah7", jumlah: "100", harga: "100.000"}
-        ]
+  constructor (){
+    super();
+    this.state = {
+      dataBahan :[]
+    }
+  }
+        componentDidMount(){
+          const urlFetch = fetch('http://localhost:3001/api/ingrid')
+          urlFetch.then( res => {
+             if(res.status === 200)
+                return res.json()   
+          }).then( resJson => {
+             this.setState({
+                 dataBahan: resJson
+             })
+          })
+       }
     render(){
         return(
           <div>
@@ -21,21 +29,19 @@ class DaftarBahan extends Component{
             <table class="table">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>No</th>
                   <th>Nama Bahan</th>
-                  <th>Amount</th>
                   <th>Harga</th>
                 </tr>
               </thead>
               <tbody>
                   {
-                      this.daftarBahan.map((y) => {
+                      this.state.dataBahan.map((y,index) => {
                           return (
                             <tr>
-                            <td>1</td>
+                            <td>{index+1}</td>
                             <td>{y.nama}</td>
-                            <td>{y.jumlah}</td>
-                            <td>{y.harga}</td>
+                            <td>{y.price_unit}</td>
                             <td><ButtonBuy nama = {y.nama} idproduk = {y.harga}/></td>
                             </tr>
                           )
@@ -65,7 +71,7 @@ class ButtonBuy extends Component{
           Beli
         </Button>
 
-        <BuyPage show = {this.state.modalShow} onHide = {() => this.setState({modalShow : !this.state.modalShow})} idproduk = {this.idproduk} namaproduk = {this.namaproduk}/>
+        <BuyPage show = {this.state.modalShow} onHide = {() => this.setState({modalShow : !this.state.modalShow})} idproduk = {this.idproduk} namaproduk = {this.namaproduk} />
       </div>
     );}
 }
