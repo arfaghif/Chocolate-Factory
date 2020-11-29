@@ -17,13 +17,10 @@ class Register extends Component{
             <h5 class="card-title text-center">Sign Up</h5>
             <form class="form-signin ">
               <div class="form-label-group">
-              <label for="inputEmail">Email address</label>
-                <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus/> 
+              <label for="inputUsername">Username</label>
+                <input type="text" id="inputUsername" class="form-control mb-2" placeholder="Username" required autofocus/> 
               </div>
-              <div class="form-label-group">
-              <label for="inputName">Name</label>
-                <input type="email" id="inputName" class="form-control mb-2 " placeholder="Name" required autofocus/> 
-              </div>
+      
 
               <div class="form-label-group">
               <label for="inputPassword">Password</label>

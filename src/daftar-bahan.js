@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Button, Modal, Row, Col } from 'react-bootstrap';
+import {Button, Modal, Row, Col, Nav } from 'react-bootstrap';
 import BuyPage from './buy-page';
+import Navbar from './navbar';
 
 class DaftarBahan extends Component{
   constructor (){
@@ -22,6 +23,8 @@ class DaftarBahan extends Component{
        }
     render(){
         return(
+          <div>
+            <Navbar/>
             <div class="table-responsive">          
             <table class="table">
               <thead>
@@ -46,6 +49,7 @@ class DaftarBahan extends Component{
                   }
               </tbody>
             </table>
+            </div>
             </div>
         )
     }

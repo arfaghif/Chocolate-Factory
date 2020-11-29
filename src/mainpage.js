@@ -7,10 +7,10 @@ class MainPage extends Component{
       super(props);
       this.state = { 
         items:  [{text: 'Approval Pesanan', link:"/approvetable"},
-                  {text: 'Daftar Pemesanan', link:"#"},
-                  {text: 'Daftar Bahan', link:"#"},
-                  {text: 'Daftar Harga Bahan Supplier', link:"#"},
-                  {text: 'Beli Bahan Dari Supplier', link:"#"},
+                  // {text: 'Daftar Pemesanan', link:"#"},
+                  {text: 'Daftar Bahan', link:"./receipts"},
+                  // {text: 'Daftar Harga Bahan Supplier', link:"#"},
+                  // {text: 'Beli Bahan Dari Supplier', link:"#"},
                   {text: 'Daftar Resep Coklat', link:"/receipts/list"},
                   {text: 'Daftar Coklat Tersedia di Pabrik', link:"/choco/grid"}]
       };
@@ -30,17 +30,20 @@ class MainPage extends Component{
     }
 }
 
+
 class Buttons extends Component{
   render() {
+    const items = this.props.items.map(item => (
+      <Link to=  {item.link}>
+      <div class = "btn w-100 p-3 my-3 btn-info btn-lg" >
+        {item.text}
+      </div>
+      </Link>
+    ))
+    
     return (
       <div class = "container p-3 my-3 bg-light text-white">
-          {this.props.items.map(item => (
-            <Link to=  {item.link}>
-            <div class = "btn w-100 p-3 my-3 btn-info btn-lg" >
-              {item.text}
-            </div>
-            </Link>
-            ))}
+          {items}
       </div>
     );
   }

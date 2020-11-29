@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 
 class ApproveTable extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      header: ["#","coklat", "jumlah", "status", "edit"],
+      table: [
+        {row: ["x","coklat1", "jumlah1", "status1"], id:"edit1"},
+        {row: ["x","coklat2", "jumlah2", "status2"], id:"edit2"},
+        {row: ["x","coklat3", "jumlah3", "status3"], id:"edit3"}
+      ]
+        
+
+      //servletPostResponse: '';
+    };
+    //this.sendHttpPostRequest = this.sendHttpPostRequest.bind(this);
+    
+  }
+  sendHttpPostRequest() {
+    var self = this;
+    var urlEndPoint = ''
+  }
+
   render(){
     return(
       <html>
@@ -9,132 +31,8 @@ class ApproveTable extends Component {
           <header>
             <Navbar/>
           </header>
-          <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
-                    </tr>
-                    <tr>
-                    <td>1,002</td>
-                    <td>amet</td>
-                    <td>consectetur</td>
-                    <td>adipiscing</td>
-                    <td>elit</td>
-                    </tr>
-                    <tr>
-                    <td>1,003</td>
-                    <td>Integer</td>
-                    <td>nec</td>
-                    <td>odio</td>
-                    <td>Praesent</td>
-                    </tr>
-                    <tr>
-                    <td>1,003</td>
-                    <td>libero</td>
-                    <td>Sed</td>
-                    <td>cursus</td>
-                    <td>ante</td>
-                    </tr>
-                    <tr>
-                    <td>1,004</td>
-                    <td>dapibus</td>
-                    <td>diam</td>
-                    <td>Sed</td>
-                    <td>nisi</td>
-                    </tr>
-                    <tr>
-                    <td>1,005</td>
-                    <td>Nulla</td>
-                    <td>quis</td>
-                    <td>sem</td>
-                    <td>at</td>
-                    </tr>
-                    <tr>
-                    <td>1,006</td>
-                    <td>nibh</td>
-                    <td>elementum</td>
-                    <td>imperdiet</td>
-                    <td>Duis</td>
-                    </tr>
-                    <tr>
-                    <td>1,007</td>
-                    <td>sagittis</td>
-                    <td>ipsum</td>
-                    <td>Praesent</td>
-                    <td>mauris</td>
-                    </tr>
-                    <tr>
-                    <td>1,008</td>
-                    <td>Fusce</td>
-                    <td>nec</td>
-                    <td>tellus</td>
-                    <td>sed</td>
-                    </tr>
-                    <tr>
-                    <td>1,009</td>
-                    <td>augue</td>
-                    <td>semper</td>
-                    <td>porta</td>
-                    <td>Mauris</td>
-                    </tr>
-                    <tr>
-                    <td>1,010</td>
-                    <td>massa</td>
-                    <td>Vestibulum</td>
-                    <td>lacinia</td>
-                    <td>arcu</td>
-                    </tr>
-                    <tr>
-                    <td>1,011</td>
-                    <td>eget</td>
-                    <td>nulla</td>
-                    <td>Class</td>
-                    <td>aptent</td>
-                    </tr>
-                    <tr>
-                    <td>1,012</td>
-                    <td>taciti</td>
-                    <td>sociosqu</td>
-                    <td>ad</td>
-                    <td>litora</td>
-                    </tr>
-                    <tr>
-                    <td>1,013</td>
-                    <td>torquent</td>
-                    <td>per</td>
-                    <td>conubia</td>
-                    <td>nostra</td>
-                    </tr>
-                    <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                    <td>himenaeos</td>
-                    <td>Curabitur</td>
-                    </tr>
-                    <tr>
-                    <td>1,015</td>
-                    <td>sodales</td>
-                    <td>ligula</td>
-                    <td>in</td>
-                    <td>libero</td>
-                    </tr>
-                </tbody>
-                </table>
+          <div class="table-responsive p-3">
+                <RequestTable header={this.state.header} table={this.state.table}/>
             </div>
             </body>
           </html>
@@ -142,4 +40,47 @@ class ApproveTable extends Component {
     }
 }
 
+class RequestTable extends Component {
+  render() {
+    return (
+      <table class="table w-80 table-striped table-sm">
+          <thead>
+            <tr>
+            {this.props.header.map(headers => (
+              <th>
+                {headers}
+              </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+              {this.props.table.map(tables =>(
+                <tr>
+                {tables.row.map(rows =>(
+                  <td>{rows}</td>
+                ))}
+                <button type="button" id={tables.id} class="btn btn-indigo btn-sm m-0">Button-{tables.id}</button>
+                </tr>
+              ))}
+          </tbody>
+      </table>
+    );
+  }
+}
+
+
+
 export default ApproveTable;
+
+// https://blog.logrocket.com/complete-guide-building-smart-data-table-react/
+// https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
+// https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
+//{this.props.table.map(tables =>(
+//   <tr>
+//     <td>{tables.col1}</td>
+//     <td>{tables.col2}</td>
+//     <td>{tables.col3}</td>
+//     <td>{tables.col4}</td>
+//     <td>{tables.col5}</td>
+//   </tr>
+// ))}

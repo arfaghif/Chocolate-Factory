@@ -10,8 +10,10 @@ import ChocoGrid from './choco-grid'
 import Navbar from './navbar'
 import { BrowserRouter as Router, Route, Switch,Link, Redirect } from 'react-router-dom';
 import ApproveTable from "./approvetable"
-import MainPage from "./mainpage"
-import Numbers from "./numbers"
+import MainPage from "./mainpage";
+import Numbers from "./numbers";
+
+import Client from "./client"
 
 // class App extends Component {
 //   render(){
@@ -112,9 +114,19 @@ class App extends Component {
                     component={MainPage}
                 />
                 <Route
+                    path="/buy"
+                    exact
+                    component={MainPage}
+                />
+                <Route
+                    path="/receipts"
+                    exact
+                    component={DaftarBahan}
+                />
+                <Route
                     path="/num"
                     exact
-                    component={Numbers}
+                    component={Client}
                 />
                 <Route
                     path="/beli"

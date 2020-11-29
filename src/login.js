@@ -17,8 +17,8 @@ class Login extends Component{
             <h5 class="card-title text-center">Sign In</h5>
             <form class="form-signin ">
               <div class="form-label-group">
-              <label for="inputEmail">Email address</label>
-                <input type="email" id="inputEmail" class="form-control mb-2 mt-1" placeholder="Email address" required autofocus/>
+              <label for="inputUsername">Username</label>
+                <input type="text" id="inputUsername" class="form-control mb-2 mt-1" placeholder="Username" required autofocus/>
                
               </div>
 
