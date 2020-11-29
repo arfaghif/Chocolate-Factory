@@ -1,27 +1,61 @@
 import React, { Component } from 'react';
+import { Modal } from 'react-bootstrap';
 import Navbar from './navbar';
+
+
+var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getReqChoc xmlns:ns2="http://codejava.net/">
+        </ns2:getReqChoc>
+    </S:Body>
+</S:Envelope>`
+var url = "http://localhost:8080/myApp/ws/req-choc";
+
+
 
 class ApproveTable extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      header: ["#","coklat", "jumlah", "status", "edit"],
+      header: ["ID","Coklat", "Jumlah", "Status", "Edit"],
       table: [
-        {row: ["x","coklat1", "jumlah1", "status1"], id:"edit1"},
-        {row: ["x","coklat2", "jumlah2", "status2"], id:"edit2"},
-        {row: ["x","coklat3", "jumlah3", "status3"], id:"edit3"}
-      ]
-        
-
-      //servletPostResponse: '';
+          {
+            idreq:-1,
+            nama:"nama",
+            qty:-1,
+            status:"status"
+          }
+        ]
     };
-    //this.sendHttpPostRequest = this.sendHttpPostRequest.bind(this);
-    
   }
-  sendHttpPostRequest() {
-    var self = this;
-    var urlEndPoint = ''
+  componentDidMount(){
+    console.log("hello")
+    var request = new XMLHttpRequest();
+    request.open("POST",url,true);
+    request.onreadystatechange = function(res){
+        if (request.readyState===4){
+            res = request.responseXML;
+            console.log(res);
+            res = res.getElementsByTagName("return")[0].childNodes[0].nodeValue;
+            console.log(res);
+            this.stateSet(res);
+        }
+    }.bind(this);
+    
+    request.setRequestHeader("Content-type","text/xml")
+    
+    request.send(SoaMessage);
+  }
+
+  stateSet(text) {
+    var parsed = JSON.parse(text);
+    parsed = parsed.RequestData;
+    console.log(parsed);
+    this.setState(
+      {table: parsed}
+    ) 
   }
 
   render(){
@@ -31,8 +65,10 @@ class ApproveTable extends Component {
           <header>
             <Navbar/>
           </header>
+          <div class="container d-flex justify-content-between">
           <div class="table-responsive p-3">
                 <RequestTable header={this.state.header} table={this.state.table}/>
+            </div>
             </div>
             </body>
           </html>
@@ -43,7 +79,7 @@ class ApproveTable extends Component {
 class RequestTable extends Component {
   render() {
     return (
-      <table class="table w-80 table-striped table-sm">
+      <table class="table table-striped table-sm">
           <thead>
             <tr>
             {this.props.header.map(headers => (
@@ -54,12 +90,13 @@ class RequestTable extends Component {
             </tr>
           </thead>
           <tbody>
-              {this.props.table.map(tables =>(
+              {this.props.table.map(row =>(
                 <tr>
-                {tables.row.map(rows =>(
-                  <td>{rows}</td>
-                ))}
-                <button type="button" id={tables.id} class="btn btn-indigo btn-sm m-0">Button-{tables.id}</button>
+                  <td>{row.idreq}</td>
+                  <td>{row.nama}</td>
+                  <td>{row.qty}</td>
+                  <td>{row.status}</td>
+                <EditButton id={row.idreq} status={row.status}/>
                 </tr>
               ))}
           </tbody>
@@ -68,19 +105,66 @@ class RequestTable extends Component {
   }
 }
 
+class EditButton extends Component{
+  constructor(props) {
+    super(props);
+    var isApproved;
+    if (this.props.status==="approved") {
+      isApproved=true;
+    }
+    this.state = {
+      showModal: false,
+      showButton: !isApproved
+    }
+  }
+  render(){
+    console.log(this.state.showButton)
+    if (this.state.showButton) {
+      return (
+        <div>
+          <button onClick={() => this.setState({showModal: !this.state.showModal})} type="button" class="btn btn-info btn-xs m-0">Approve</button>
+          <ApproveModal show ={this.state.showModal} onHide = {() => this.setState({showModal : !this.state.showModal})} id={this.props.id}/>
+        </div>
+        );
+    }
+    else{
+      return(<td></td>)
+    }
+ }
+}
+
+class ApproveModal extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      id:-1
+    }
+  }
+    handleApprove(id) {
+      //handle approval
+      return this.props.onHide;    
+    }
+
+    hide() {
+      return this.props.onHide;
+    }
+
+    render() {
+      return(
+        <Modal show={this.props.show}>
+          <Modal.Header>
+            <Modal.Title>Request Approval</Modal.Title>
+          </Modal.Header>
+      <Modal.Body>Approve request with id = {this.props.id}?</Modal.Body>
+          <Modal.Footer>
+            <button onClick={this.hide()} type="button" class="btn btn-danger btn-xs">Cancel</button>
+            <button onClick={this.handleApprove(this.props.id)} class="btn btn-success btn-xs">Save</button>
+          </Modal.Footer>
+        </Modal>
+    );
+    }
+
+}
 
 
-export default ApproveTable;
-
-// https://blog.logrocket.com/complete-guide-building-smart-data-table-react/
-// https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
-// https://dev.to/abdulbasit313/learn-how-to-create-react-js-table-with-hooks-that-has-delete-functionality-too-2jjb
-//{this.props.table.map(tables =>(
-//   <tr>
-//     <td>{tables.col1}</td>
-//     <td>{tables.col2}</td>
-//     <td>{tables.col3}</td>
-//     <td>{tables.col4}</td>
-//     <td>{tables.col5}</td>
-//   </tr>
-// ))}
+export default ApproveTable;sss
